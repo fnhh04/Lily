@@ -58,7 +58,7 @@ contract Lily is Context, IERC20, Ownable {
     bool public swapAndLiquifyEnabled = true;
     
     uint256 public _maxTxAmount = 1000000000 * 10**6 * 10**9;
-    // number of token to add to liquidity pool at uniswap
+    // initial number of token to sell to liquidity pool at uniswap (0.05% of total token)
     uint256 private numTokensSellToAddToLiquidity = 500000 * 10**6 * 10**9;
     
     event MinTokensBeforeSwapUpdated(uint256 minTokensBeforeSwap);
@@ -173,12 +173,14 @@ contract Lily is Context, IERC20, Ownable {
         return _totalCharityCollected;
     }
     
-    // this function is to apply add
+    // this function is to subtract fee from sender's balance and add to total liquidity fee pool
     function deliver(uint256 tAmount) public {
         address sender = _msgSender();
         require(!_isExcluded[sender], "Excluded addresses cannot call this function");
         (uint256 rAmount,,,,,) = _getValues(tAmount);
+        // sender's balance of reflection amount is deducted from the sender's balance
         _rOwned[sender] = _rOwned[sender].sub(rAmount);
+
         _rTotal = _rTotal.sub(rAmount);
         _tFeeTotal = _tFeeTotal.add(tAmount);
     }
@@ -201,7 +203,7 @@ contract Lily is Context, IERC20, Ownable {
         return rAmount.div(currentRate);
     }
 
- 
+    // addresses that are excluded from Reflection amount
     function excludeFromReward(address account) public onlyOwner() {
         // require(account != 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, 'We can not exclude Uniswap router.');
         require(!_isExcluded[account], "Account is already excluded");
@@ -212,6 +214,7 @@ contract Lily is Context, IERC20, Ownable {
         _excluded.push(account);
     }
 
+    // addresses that are included for Reflection amount
     function includeInReward(address account) external onlyOwner() {
         require(_isExcluded[account], "Account is already excluded");
         for (uint256 i = 0; i < _excluded.length; i++) {
@@ -260,7 +263,7 @@ contract Lily is Context, IERC20, Ownable {
      //to recieve ETH from uniswapV2Router when swaping
     receive() external payable {}
 
-    // fee is deducted from total reflection supply 
+    // fee is deducted from total reflection supply but added to total fee pool to be disributed to token holders
     function _reflectFee(uint256 rFee, uint256 tFee) private {
         _rTotal = _rTotal.sub(rFee);
         _tFeeTotal = _tFeeTotal.add(tFee);
@@ -276,6 +279,7 @@ contract Lily is Context, IERC20, Ownable {
     function _getTValues(uint256 tAmount) private view returns (uint256, uint256, uint256) {
         uint256 tFee = calculateTaxFee(tAmount);
         uint256 tLiquidity = calculateLiquidityFee(tAmount);
+        // transfer amount subtract the 2% tax fee and 6% liquidity fee
         uint256 tTransferAmount = tAmount.sub(tFee).sub(tLiquidity);
         return (tTransferAmount, tFee, tLiquidity);
     }
@@ -284,6 +288,7 @@ contract Lily is Context, IERC20, Ownable {
         uint256 rAmount = tAmount.mul(currentRate);
         uint256 rFee = tFee.mul(currentRate);
         uint256 rLiquidity = tLiquidity.mul(currentRate);
+        // transfer amount subtract the 2% tax fee and 6% liquidity fee
         uint256 rTransferAmount = rAmount.sub(rFee).sub(rLiquidity);
         return (rAmount, rTransferAmount, rFee);
     }
@@ -311,7 +316,7 @@ contract Lily is Context, IERC20, Ownable {
         return (rSupply, tSupply);
     }
     
-    //add liquidity amount to liquidity pool
+    //liquidity fees from transactions go into the smart contract
     function _takeLiquidity(uint256 tLiquidity) private {
         uint256 currentRate =  _getRate();
         uint256 rLiquidity = tLiquidity.mul(currentRate);
@@ -404,8 +409,9 @@ contract Lily is Context, IERC20, Ownable {
             from != uniswapV2Pair &&
             swapAndLiquifyEnabled
         ) {
+            
             contractTokenBalance = numTokensSellToAddToLiquidity;
-            //add liquidity
+            //supply liquidity when the contract token balance is greater than 0.05% of total token
             swapAndLiquify(contractTokenBalance);
         }
         
