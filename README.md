@@ -1,7 +1,7 @@
 This is a boilerplate for deploying Safemoon token (note: I have changed the name to 'Francis_Ldn') to the Binance Smart Chain testnet.
 Download the files in this folder and install the dependencies below.
 # Dependencies 
-Install nodejs:
+Install nodejs so that you can run 'npm' command:
 https://nodejs.org/en/download/
 
 Run these commands in the main folder directory to install the dependencies:
