@@ -1,5 +1,5 @@
 This is a boilerplate for deploying Safemoon token (note: I have changed the name to 'Francis_Ldn') to the Binance Smart Chain testnet.
-Download the file and install the dependencies below.
+Download the files in this folder and install the dependencies below.
 # Dependencies 
 run this in the main folder directory:
 `npm install -g truffle`
