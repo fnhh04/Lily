@@ -17,7 +17,7 @@ In the main folder --> enter the following command:
 `touch .env`
 This will create .env file in the main folder;
 In the .env file, enter your privateKeys ='YOUR_PRIVATE_KEY';
-Your private keys will be used in the truffle-config.js to deploy the contract
+Your private key will be used in the truffle-config.js to deploy the contract
 
 # Deploy to bscTestnet:
 Make sure you have sufficient BNB in your bscTestnet account. If not, you can get some fake BNB from here:
