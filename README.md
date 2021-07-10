@@ -1,6 +1,7 @@
 This is a boilerplate for deploying Safemoon token (note: I have changed the name to 'Francis_Ldn').
 Download the file and install the dependencies below.
-# Dependencies - run this in the main folder directory:
+# Dependencies 
+run this in the main folder directory:
 `npm install -g truffle`
 `npm install touch-for-windows`
 `npm install @truffle/hdwallet-provider`  
