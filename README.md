@@ -33,7 +33,7 @@ Dependences:
 `npm install -D truffle-plugin-verify`
 This will install truffle-plugin-verify package
 Then you can verify your code on bscTestnet by running the code below:
-`truffle run verify FNHH@{YOUR_CONTRACT_ADDRESS} --network bscTestnet
+`truffle run verify FNHH@{YOUR_CONTRACT_ADDRESS} --network bscTestnet`
 
 
 
