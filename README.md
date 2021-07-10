@@ -11,11 +11,11 @@ Run these commands in the main folder directory to install the dependencies:
 
 `npm install -g truffle`
 
-`npm install touch-for-windows`
+`npm install -g touch-for-windows`
 
-`npm install @truffle/hdwallet-provider`  
+`npm install -g @truffle/hdwallet-provider`  
 
-`npm install dotenv`
+`npm install -g dotenv`
 
 # Initialize:
 In the main folder --> enter the following command:
