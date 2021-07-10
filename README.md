@@ -18,13 +18,13 @@ This will create .env file in the main folder
 In the .env file, enter your privateKeys ='YOUR_PRIVATE_KEY'
 Your private keys will be used in the truffle-config.js to deploy the contract
 
-# deploy to bscTestnet
+# deploy to bscTestnet:
 Make sure you have sufficient BNB in your bscTestnet account. If not, you can get some fake BNB from here:
 https://testnet.binance.org/faucet-smart
 And then, in the main folder, run the following command:
 `truffle migrate --reset --network bscTestnet`
 
-# Verify code on bscTestnet scan
+# Verify code on bscTestnet scan:
 create an account to receive BSC API key
 https://bscscan.com/myapikey
 In the .env file, enter your API_KEY = 'YOUR_API_KEY'
