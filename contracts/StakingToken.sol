@@ -22,6 +22,7 @@ abstract contract StakingToken is IERC20, Ownable, sToken {
 	Fnhh public fnhh;
 	sToken public stoken; 
 	address public liquiditypool;
+	uint256 public withdrawalfee = 7; // withdrawal fee of 7% deducted from withdrawal amount
 
 	//array to keep the address of all the stakers --> keep track for transaction 
 	address[] public stakers;
@@ -53,9 +54,8 @@ abstract contract StakingToken is IERC20, Ownable, sToken {
 	}
 
 	//allow withdrawal of tokens
-	//deduct 7% 
-	function unstaking(uint256 _amount, uint256 withdrawalfee) public {
-		//  withdrawal fee
+	//deduct 7% --> defined at the beginning
+	function unstaking(uint256 _amount) public {
 		require(hasStaked[msg.sender]=true, 'no staked amount');
 		require(stakingBalance[msg.sender]> 0, "staking balance cannot be 0" );
 		// reduce the staking balance (sToken) to lower amount
