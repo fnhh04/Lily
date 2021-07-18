@@ -6,18 +6,18 @@ import './SafeMath.sol';
 
 abstract contract sToken is IERC20 {
     using SafeMath for uint;
-
+    // name, symbol, decimals
     string internal constant _name = 'Staked Token';
     string internal constant _symbol = 'STK';
     uint8 internal constant _decimals = 9;
 
+    // balance of original token
     mapping(address => uint) private balanceOf;
     mapping(address => mapping(address => uint)) private allowance;
 
+    //broadcast transaction
     event Approval(address indexed owner, address indexed spender, uint value);
     event Transfer(address indexed from, address indexed to, uint value);
-
-    // return the balance of reflection amount
 
     function transfer(address to, uint value) external override returns (bool) {
         balanceOf[msg.sender] = balanceOf[msg.sender].sub(value);
