@@ -10,27 +10,30 @@ https://nodejs.org/en/download/
 Run these commands in the main folder directory to install the dependencies:
 
 ```
-`npm install -g truffle`
+npm install -g truffle
 
-`npm install -g touch-for-windows`
+npm install -g touch-for-windows
 
-`npm install -g @truffle/hdwallet-provider`  
+npm install -g @truffle/hdwallet-provider  
 
-`npm install -g dotenv`
+npm install -g dotenv
 ```
 
 # Initialize:
 In the main folder --> enter the following command:
 
-`npm init -y `
+```
+npm init -y
 
-`truffle init`
+truffle init
+```
 
 # Create .env file to store private key:
 In the main folder --> enter the following command:
+```
+touch .env
 
-`touch .env`
-
+```
 This will create .env file in the main folder;
 
 In the .env file, enter your privateKeys ='YOUR_PRIVATE_KEY';
@@ -44,8 +47,10 @@ https://testnet.binance.org/faucet-smart
 
 And then, in the main folder, run the following command:
 
-`truffle migrate --reset --network bscTestnet`
+```
+truffle migrate --reset --network bscTestnet
 
+```
 # Verify code on bscTestnet scan:
 create an account to receive BSC API key:
 
@@ -56,14 +61,16 @@ In the .env file, enter your API_KEY = 'YOUR_API_KEY';
 Your API Key will be used to verify the code for the smart contract which you have deployed;
 
 Dependences:
-
-`npm install -D truffle-plugin-verify`
+```
+npm install -D truffle-plugin-verify
+```
 
 This will install truffle-plugin-verify package
 
 Then you can verify your code on bscTestnet by running the code below:
-
-`truffle run verify FNHH@{YOUR_CONTRACT_ADDRESS} --network bscTestnet`
+```
+truffle run verify FNHH@{YOUR_CONTRACT_ADDRESS} --network bscTestnet
+```
 
 
 
