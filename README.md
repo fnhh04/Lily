@@ -9,6 +9,7 @@ https://nodejs.org/en/download/
 
 Run these commands in the main folder directory to install the dependencies:
 
+```
 `npm install -g truffle`
 
 `npm install -g touch-for-windows`
@@ -16,6 +17,7 @@ Run these commands in the main folder directory to install the dependencies:
 `npm install -g @truffle/hdwallet-provider`  
 
 `npm install -g dotenv`
+```
 
 # Initialize:
 In the main folder --> enter the following command:
